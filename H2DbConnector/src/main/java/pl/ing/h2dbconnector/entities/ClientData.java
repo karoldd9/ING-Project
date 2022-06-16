@@ -12,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @AllArgsConstructor
@@ -27,13 +27,13 @@ public class ClientData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientDataId;
 
-    private LocalDateTime infoAsOfDate;
+    private LocalDate infoAsOfDate;
 
     private Long customerId;
 
     private String customerName;
 
-    private LocalDateTime customerStartDate;
+    private LocalDate customerStartDate;
 
     private String customerType;
 
@@ -42,4 +42,8 @@ public class ClientData {
     private String customerRiskClass;
 
     private String customerBusinessType;
+
+    private Double R1;
+
+    private Double R2;
 }
