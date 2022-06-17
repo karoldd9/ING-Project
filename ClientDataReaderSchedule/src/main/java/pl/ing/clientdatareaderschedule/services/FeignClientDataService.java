@@ -21,4 +21,8 @@ public class FeignClientDataService {
     public FeignClientData saveFeignClientData(FeignClientData feignClientData) {
         return feignCientDataRepo.saveFeignClientData(feignClientData);
     }
+
+    public List<FeignClientData> getFeignClientDataLast30DaysById(Long id) {
+        return feignCientDataRepo.getFeignClientDataLast30DaysByCustomerId(id);
+    }
 }

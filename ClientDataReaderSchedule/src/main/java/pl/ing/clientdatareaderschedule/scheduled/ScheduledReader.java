@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class ScheduledReader {
 
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 10000)
     public void readFile() {
         DataReader dataReader = new DataReader();
 

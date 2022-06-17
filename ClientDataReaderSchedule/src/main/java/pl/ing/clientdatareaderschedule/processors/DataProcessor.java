@@ -21,6 +21,8 @@ public class DataProcessor {
                     Validator.splitClientDataByParameter(clientDataLine, ",")
             );
 
+            feignClientData.setR1(R1Process(feignClientData.getCustomerId()));
+
 
 
             try {
@@ -34,8 +36,19 @@ public class DataProcessor {
         return true;
     }
 
-    private Double R1Process () {
-        return 0D;
+    private Double R1Process (Long customerId) {
+        try {
+            List<FeignClientData> feignClientDataList = HttpConnector.getClientDataAsStream("/"+customerId+"/last30days");
+
+            for(FeignClientData feignClientData: feignClientDataList) {
+                System.out.println(feignClientData);
+            }
+        } catch (Exception e) {
+            System.out.println("Couldn't get clients...");
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private Double R2Process () {
