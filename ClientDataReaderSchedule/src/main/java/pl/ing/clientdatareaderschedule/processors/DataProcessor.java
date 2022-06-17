@@ -1,14 +1,9 @@
 package pl.ing.clientdatareaderschedule.processors;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import pl.ing.clientdatareaderschedule.feignEntities.FeignClientData;
+import pl.ing.clientdatareaderschedule.httpConnector.HttpConnector;
 import pl.ing.clientdatareaderschedule.validation.Validator;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,22 +11,20 @@ import java.util.List;
 
 public class DataProcessor {
 
-    Validator validator = new Validator();
 
-
-    public boolean process(List<String> clientDataLines) throws IOException {
+    public boolean process(List<String> clientDataLines) {
 
         clientDataLines.remove(0); //remove column names from list
 
         for(String clientDataLine: clientDataLines) {
             FeignClientData feignClientData = setFeignClientDataFromStringList(
-                    validator.splitClientDataByParameter(clientDataLine, ",")
+                    Validator.splitClientDataByParameter(clientDataLine, ",")
             );
 
 
 
             try {
-                sendJson(validator.FeignClientDataToJSONString(feignClientData));
+                HttpConnector.postJson(Validator.FeignClientDataToJSONString(feignClientData));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -74,20 +67,5 @@ public class DataProcessor {
                 0D,
                 0D
         );
-    }
-
-    private void sendJson(String jsonString) throws Exception {
-
-        StringRequestEntity requestEntity = new StringRequestEntity(
-                jsonString,
-                "application/json",
-                "UTF-8");
-
-        PostMethod postMethod = new PostMethod("http://localhost:8080");
-        postMethod.setRequestEntity(requestEntity);
-
-        HttpClient httpClient = new HttpClient();
-
-        int statusCode = httpClient.executeMethod(postMethod);
     }
 }

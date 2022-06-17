@@ -1,17 +1,14 @@
 package pl.ing.clientdatareaderschedule.validation;
 
-import org.json.JSONObject;
 import pl.ing.clientdatareaderschedule.feignEntities.FeignClientData;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class Validator {
 
-    private List<String> validColumns = Arrays.asList(
+    private static List<String> validColumns = Arrays.asList(
             "CUSTOMER_BUSINESS_TYPE",
             "CUSTOMER_ID",
             "CUSTOMER_INCOME",
@@ -22,7 +19,7 @@ public class Validator {
             "INFO_AS_OF_DATE"
     );
 
-    private List<String> stringListToUpperCase(List<String> list) {
+    private static List<String> stringListToUpperCase(List<String> list) {
         List<String> upperCaseList = new LinkedList<>();
 
         for(String value: list) {
@@ -32,7 +29,7 @@ public class Validator {
         return upperCaseList;
     }
 
-    public boolean validateClientData(List<String> clientData) throws Exception {
+    public static boolean validateClientData(List<String> clientData) throws Exception {
         List<List<String>> rows = splitClientDataByParameter(clientData, ";");
 
         List<String> missedColumns = new LinkedList<>();
@@ -54,7 +51,7 @@ public class Validator {
         return true;
     }
 
-    public List<List<String>> splitClientDataByParameter(List<String> clientDataLines, String parameter) {
+    public static List<List<String>> splitClientDataByParameter(List<String> clientDataLines, String parameter) {
         List<List<String>> splittedClientData = new LinkedList<>();
 
         for(String line: clientDataLines) {
@@ -64,7 +61,7 @@ public class Validator {
         return splittedClientData;
     }
 
-    public List<String> splitClientDataByParameter(String clientDataLine, String parameter) {
+    public static List<String> splitClientDataByParameter(String clientDataLine, String parameter) {
 
         List<String> splittedClientData = new LinkedList<>(
                 Arrays.asList(
@@ -74,7 +71,7 @@ public class Validator {
         return splittedClientData;
     }
 
-    public String FeignClientDataToJSONString(FeignClientData feignClientData) {
+    public static String FeignClientDataToJSONString(FeignClientData feignClientData) {
 
         String data = "{\n" +
                 "    \"clientDataId\": "+feignClientData.getClientDataId()+",\n" +

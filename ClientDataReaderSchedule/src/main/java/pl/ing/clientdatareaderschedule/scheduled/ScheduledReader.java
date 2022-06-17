@@ -14,7 +14,7 @@ public class ScheduledReader {
     @Scheduled(fixedDelay = 1000)
     public void readFile() {
         DataReader dataReader = new DataReader();
-        Validator validator = new Validator();
+
         DataProcessor dataProcessor = new DataProcessor();
 
         try {
@@ -22,7 +22,7 @@ public class ScheduledReader {
                     dataReader.getResourceFileLines("path.xml").get(0)
             );
 
-            if(validator.validateClientData(fileLines)) {
+            if(Validator.validateClientData(fileLines)) {
                 dataProcessor.process(fileLines);
             }
 
