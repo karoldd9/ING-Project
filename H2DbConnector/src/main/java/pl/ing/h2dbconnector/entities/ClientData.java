@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.ing.h2dbconnector.entities.dto.ClientDataDto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -47,4 +49,26 @@ public class ClientData {
     private Double R1;
 
     private Double R2;
+
+    public static ClientData of(ClientDataDto clientDataDto) {
+        ClientData clientData = new ClientData(
+                clientDataDto.getClientDataId(),
+                clientDataDto.getInfoAsOfDate(),
+                clientDataDto.getCustomerId(),
+                clientDataDto.getCustomerName(),
+                clientDataDto.getCustomerStartDate(),
+                clientDataDto.getCustomerType(),
+                clientDataDto.getCustomerIncome(),
+                clientDataDto.getCustomerRiskClass(),
+                clientDataDto.getCustomerBusinessType(),
+                clientDataDto.getR1(),
+                clientDataDto.getR2()
+        );
+
+        return clientData;
+    }
+
+    public static List<ClientData> ofList(List<ClientDataDto> clientDataDtos) {
+        return clientDataDtos.stream().map(ClientData::of).toList();
+    }
 }

@@ -1,16 +1,11 @@
 package pl.ing.h2dbconnector.services;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.ing.h2dbconnector.entities.ClientData;
+import pl.ing.h2dbconnector.mappers.ClientDataMapper;
 import pl.ing.h2dbconnector.repositories.ClientDataRepository;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -24,18 +19,11 @@ public class ClientDataService {
     }
 
     public List<ClientData> getAllClientData() {
-        Iterator<ClientData> clientDataIterator = clientDataRepository.findAll().iterator();
-
-        List<ClientData> clientData = new LinkedList<>();
-
-        while(clientDataIterator.hasNext()) {
-            clientData.add(clientDataIterator.next());
-        }
-
-        return clientData;
+        return ClientDataMapper.mapIteratorToList(clientDataRepository.findAll().iterator());
     }
 
     public List<ClientData> getClientDataByCustomerId(Long customerId) {
+
         return clientDataRepository.findByCustomerId(customerId);
     }
 }
