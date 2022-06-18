@@ -35,9 +35,9 @@ public class FeignClientData implements Serializable {
 
     private String customerBusinessType;
 
-    private Double R1;
+    private BigDecimal R1;
 
-    private Double R2;
+    private BigDecimal R2;
 
     @Override
     public String toString() {
