@@ -31,6 +31,9 @@ public class ScheduledReader {
             System.out.println("Couldn't find correct file by path. Loading default \"task.csv\" file...");
             try {
                 List<String> fileLines = dataReader.getResourceFileLines("task.csv");
+                if(Validator.validateClientData(fileLines)) {
+                    dataProcessor.process(fileLines);
+                }
             } catch (Exception ex) {
                 e.printStackTrace();
             }
