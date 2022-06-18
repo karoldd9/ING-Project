@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class ScheduledReader {
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(cron = "0 1 20 * * *")
     public void readFile() {
         DataReader dataReader = new DataReader();
 
