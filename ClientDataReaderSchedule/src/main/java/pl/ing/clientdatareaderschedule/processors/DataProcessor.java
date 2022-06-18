@@ -1,6 +1,7 @@
 package pl.ing.clientdatareaderschedule.processors;
 
 import pl.ing.clientdatareaderschedule.feignEntities.FeignClientData;
+import pl.ing.clientdatareaderschedule.feignEntities.FeignMailMessage;
 import pl.ing.clientdatareaderschedule.httpConnector.HttpConnector;
 import pl.ing.clientdatareaderschedule.validation.Validator;
 
@@ -45,6 +46,29 @@ public class DataProcessor {
                 e.printStackTrace();
             }
 
+
+            try {
+                if(feignClientData.getCustomerType().equals("TYPE_A1") || feignClientData.getCustomerType().equals("TYPE_A5")) {
+                    FeignMailMessage feignMailMessage = new FeignMailMessage(
+                            "dyrektorjednostki@fikcyjnafirma.com",
+                            "Zmiana klasy ryzyka klienta",
+                            "Uprzejmie informuje, ze zmienila sie klasa ryzyka dla" +
+                            " klienta "+feignClientData.getCustomerId());
+
+                    HttpConnector.sendMail(Validator.feignMailMessageToJSON(feignMailMessage));
+
+                    feignMailMessage.setAddressee("koordynatorkoordynatorow@fikcyjnafirma.pl");
+                } else if (feignClientData.getCustomerType().equals("TYPE_A2") && feignClientData.getCustomerBusinessType().equals("BR_2")) {
+                    FeignMailMessage feignMailMessage = new FeignMailMessage(
+                            "koordynatorkoordynatorow@fikcyjnafirma.com",
+                            "Przeglad ryzyka klienta",
+                            "Prosze o przeglad ryzyka klienta "+feignClientData.getCustomerId());
+
+                    HttpConnector.sendMail(Validator.feignMailMessageToJSON(feignMailMessage));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
             try {

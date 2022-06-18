@@ -23,6 +23,7 @@ import java.util.List;
 public class HttpConnector {
 
     private static String localhostAddress = ClientDataReaderScheduleApplication.localhostAddress;
+    private static String mailingServiceAddress = ClientDataReaderScheduleApplication.mailingServiceAddress;
 
     public static int postJson(String jsonString) throws Exception {
 
@@ -32,6 +33,21 @@ public class HttpConnector {
                 "UTF-8");
 
         PostMethod postMethod = new PostMethod(localhostAddress);
+        postMethod.setRequestEntity(requestEntity);
+
+        HttpClient httpClient = new HttpClient();
+
+        return httpClient.executeMethod(postMethod);
+    }
+
+    public static int sendMail(String jsonString) throws Exception {
+
+        StringRequestEntity requestEntity = new StringRequestEntity(
+                jsonString,
+                "application/json",
+                "UTF-8");
+
+        PostMethod postMethod = new PostMethod(mailingServiceAddress);
         postMethod.setRequestEntity(requestEntity);
 
         HttpClient httpClient = new HttpClient();

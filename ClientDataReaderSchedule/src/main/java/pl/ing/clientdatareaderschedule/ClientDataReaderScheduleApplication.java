@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class ClientDataReaderScheduleApplication {
 
     public static String localhostAddress = "http://localhost:8080/api/customer";
+    public static String mailingServiceAddress = "http://localhost:8082/mail";
     public static void main(String[] args) {
         SpringApplication.run(ClientDataReaderScheduleApplication.class, args);
     }

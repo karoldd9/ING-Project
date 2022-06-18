@@ -1,6 +1,7 @@
 package pl.ing.clientdatareaderschedule.validation;
 
 import pl.ing.clientdatareaderschedule.feignEntities.FeignClientData;
+import pl.ing.clientdatareaderschedule.feignEntities.FeignMailMessage;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -88,5 +89,15 @@ public class Validator {
                 "}";
 
         return data;
+    }
+
+    public static String feignMailMessageToJSON(FeignMailMessage feignMailMessage) {
+        String result = "{\n" +
+                "    \"addressee\": \""+feignMailMessage.getAddressee()+"\",\n" +
+                "    \"subject\": \""+feignMailMessage.getSubject()+"\",\n" +
+                "    \"body\": \""+feignMailMessage.getBody()+"\"\n" +
+                "}";
+
+        return result;
     }
 }

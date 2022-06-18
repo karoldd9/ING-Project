@@ -66,7 +66,7 @@ public class ClientAndNoteController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(NoteClientDto.ofList(NoteFilter.filterSinceAndUntil(noteClientService.getNoteClientByCustomerId(customerId), sinceDate, untilDate)));
     }
 
-    @PostMapping
+    @PostMapping("/saveCustomer")
     public ClientDataDto saveClientData(@RequestBody @Valid ClientDataDto clientDataDto) {
         if(clientDataDto.getClientDataId() != null) {
             clientDataDto.setClientDataId(null);

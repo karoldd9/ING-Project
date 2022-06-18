@@ -6,7 +6,7 @@ import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 
 @LoadBalancerClient(value = "h2-db-connector")
-public class FeignLoadBalancer {
+public class FeignClientAndNoteLoadBalancer {
 
     @LoadBalanced
     @Bean
