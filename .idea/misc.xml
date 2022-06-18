@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/ServiceRegistry/pom.xml" />
         <option value="$PROJECT_DIR$/H2DbConnector/pom.xml" />
         <option value="$PROJECT_DIR$/ClientDataReaderSchedule/pom.xml" />
+        <option value="$PROJECT_DIR$/Mailings/pom.xml" />
       </list>
     </option>
   </component>

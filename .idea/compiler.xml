@@ -23,6 +23,7 @@
         <module name="ServiceRegistry" />
         <module name="ClientDataReaderSchedule" />
         <module name="IngProject" />
+        <module name="Mailings" />
       </profile>
     </annotationProcessing>
   </component>
@@ -30,6 +31,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ClientDataReaderSchedule" options="-parameters" />
       <module name="H2DbConnector" options="-parameters" />
+      <module name="Mailings" options="-parameters" />
       <module name="ServiceRegistry" options="-parameters" />
     </option>
   </component>
