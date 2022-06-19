@@ -32,7 +32,7 @@ public class HttpConnector {
                 "application/json",
                 "UTF-8");
 
-        PostMethod postMethod = new PostMethod(localhostAddress);
+        PostMethod postMethod = new PostMethod(localhostAddress+"/saveCustomer");
         postMethod.setRequestEntity(requestEntity);
 
         HttpClient httpClient = new HttpClient();

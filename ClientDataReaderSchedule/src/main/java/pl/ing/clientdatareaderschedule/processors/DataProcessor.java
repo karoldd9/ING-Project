@@ -1,8 +1,12 @@
 package pl.ing.clientdatareaderschedule.processors;
 
+import com.netflix.discovery.converters.Auto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.ing.clientdatareaderschedule.feignEntities.FeignClientData;
 import pl.ing.clientdatareaderschedule.feignEntities.FeignMailMessage;
 import pl.ing.clientdatareaderschedule.httpConnector.HttpConnector;
+import pl.ing.clientdatareaderschedule.services.FeignClientAndNoteService;
 import pl.ing.clientdatareaderschedule.validation.Validator;
 
 import java.math.BigDecimal;
@@ -12,7 +16,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DataProcessor {
-
 
     public boolean process(List<String> clientDataLines) {
 
@@ -72,7 +75,7 @@ public class DataProcessor {
 
 
             try {
-                HttpConnector.postJson(Validator.FeignClientDataToJSONString(feignClientData));
+                System.out.println("JSON post feign client data: "+HttpConnector.postJson(Validator.FeignClientDataToJSONString(feignClientData)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
